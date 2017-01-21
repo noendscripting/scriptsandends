@@ -1,0 +1,17 @@
+[
+{"Name":"RPC","Protocol":"TCP","Value":"135"},
+{"Name":"LDAP","Value":"389","Protocol":"TCP"},
+{"Name":"LDAP","Value":"389","Protocol":"UDP"},
+{"Name":"LDAP SSL","Protocol":"TCP","Value":"636"},
+{"Name":"LDAP GC SSL","Protocol":"TCP","Value":"3269"},
+{"Name":"DNS","Protocol":"TCP","Value":"53"},
+{"Name":"DNS","Protocol":"UDP","Value":"53"},
+{"Name":"Kerberos","Protocol":"TCP","Value":"88"},
+{"Name":"Kerberos","Protocol":"UDP","Value":"88"},
+{"Name":"SMB","Protocol":"TCP","Value":"445"},
+{"Name":"NetBIOS","Protocol":"UDP","Value":"137"},
+{"Name":"NetBIOS NetLogon Browsing","Protocol":"UDP","Value":"138"},
+{"Name":"NetBIOS Session","Protocol":"TCP","Value":"139"},
+{"Name":"WINS Replication", "Protocol":"TCP", "Value":"42"}
+]
+
