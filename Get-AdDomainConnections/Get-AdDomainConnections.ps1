@@ -91,7 +91,7 @@ $PSDefaultParameterValues = @{
 
 if ($log.Length -ne 0)
 {
- if(Test-Path $log | Out-Null)
+ if(Test-Path (split-path $log -parent) | Out-Null)
  {
     $PSDefaultParameterValues["write-log:logfile"]=$log
     write-log "Setting location of log file to $($log)"
@@ -99,7 +99,7 @@ if ($log.Length -ne 0)
  }
  else
  {
-    write-log "Custom log is not found setting log to   $($env:ALLUSERSPROFILE)\$($Server)-connection.log"
+    write-log "Custom log is not found setting log to   $($env:ALLUSERSPROFILE)\GetADDomainconnection.log"
  }
 
 }
@@ -124,7 +124,7 @@ elseif (!(Test-Path .\config.json))
 
 }
 
-if ($report -eq $true -and $csvfile.Length - 0)
+if ($report -eq $true -and $csvfile.Length -ne 0)
 {
 
    write-log "Report file information is missing`n Terminating script" -severity ERROR
