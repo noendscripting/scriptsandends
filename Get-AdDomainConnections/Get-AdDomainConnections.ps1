@@ -91,7 +91,7 @@ $PSDefaultParameterValues = @{
 
 if ($log.Length -ne 0)
 {
- if(Test-Path (split-path $log -parent) | Out-Null)
+ if(Test-Path (split-path $log -parent))
  {
     $PSDefaultParameterValues["write-log:logfile"]=$log
     write-log "Setting location of log file to $($log)"
@@ -124,10 +124,10 @@ elseif (!(Test-Path .\config.json))
 
 }
 
-if ($report -eq $true -and $csvfile.Length -ne 0)
+if ($report -eq $true -and !(Test-Path (split-path $csvfile -parent)))
 {
 
-   write-log "Report file information is missing`n Terminating script" -severity ERROR
+   write-log "Report file information is missing or incorrect`n Terminating script" -severity ERROR
     break
 
 }
