@@ -41,7 +41,6 @@
 
 param(
 [string]$log
-
 )
 
 Function verify-serviceAccount ($username)
