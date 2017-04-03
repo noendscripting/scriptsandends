@@ -186,7 +186,15 @@ Function Remove-ADFS
     $settings = New-ScheduledTaskSettingsSet -DisallowDemandStart
     Register-ScheduledTask  "CleanWID" -RunLevel Highest -User SYSTEM -Trigger $trigger -Action $action -Settings $settings -ErrorAction Stop
 
-    write-log "Restarting computer"
+    write-log "Restarting computer in 10 seconds click Ctrl+C to stop"
+    $i = 0
+    Do 
+    {
+        Start-Sleep -Seconds 1
+        $i++
+
+
+    }while ($i -le 10) 
     Restart-Computer -Force
 
 
