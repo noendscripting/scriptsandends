@@ -28,11 +28,6 @@
   .EXAMPLE
    ./manage-ADFSNode.ps -verbose
    Starts script with additional verbose information provided on screen.
-
-
-    
-
-
    
 #>
 
