@@ -13,7 +13,7 @@ DISCLAIMER
     #>
 
 
-#chnage 
+
 Function On-Load
 {
     
@@ -24,7 +24,7 @@ Function On-Load
 
 }
 
-<#Function get-ResourceGroups
+Function get-ResourceGroups
 {
     $richTextBox1.AppendText("$($DropDownSubscription.SelectedItem) subscription selected`n")
     $richTextBox1.AppendText("Getting List of Resource Groups`n")
@@ -51,9 +51,9 @@ Function get-storage
    $DropDownStorage.Visible = $true
    $StorageSectionLabel.Visible = $true
 
-}#>
+}
 
-<#Function get-vnet
+Function get-vnet
 {
      
      $DropDownVNET.Items.Clear()
@@ -65,9 +65,9 @@ Function get-storage
      $DropDownVNET.Visible = $true
      $vNetSectionLabel.Visible = $true
 
-}#>
+}
 
-<#Function get-subnets
+Function get-subnets
 {
     $DropDownSubnet.items.clear()
     $richTextBox1.AppendText("Getting list of Subnets in $($DropDownVNET.SelectedItem) region`n")
@@ -78,9 +78,9 @@ Function get-storage
    
 
 
-}#>
+}
 
-<#Function enable-VMproperties
+Function enable-VMproperties
 {
    
   $DropDownSize.items.addrange(@("Standard_D2_v2","Standard_F2"))
@@ -99,7 +99,7 @@ Function get-storage
   $VMNameSectionLabel.Visible = $true
   $VMPrexixTextBox.Visible = $true
 
-}#>
+}
 
 
 Function get-filename 
@@ -182,128 +182,128 @@ $Form.Text = ”Azure VM Build Assembler”
 $Form.MaximizeBox = $false
 
 
-#$SubscriptionSectionLabel = new-object System.Windows.Forms.Label
-#$SubscriptionSectionLabel.Location = new-object System.Drawing.Size(120,10)
-#$SubscriptionSectionLabel.size = new-object System.Drawing.Size(160,20)
-#$SubscriptionSectionLabel.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold)
-#$SubscriptionSectionLabel.BorderStyle = 0
-#$SubscriptionSectionLabel.Text = "Select Subscription"
-#$Form.Controls.Add($SubscriptionSectionLabel)
+$SubscriptionSectionLabel = new-object System.Windows.Forms.Label
+$SubscriptionSectionLabel.Location = new-object System.Drawing.Size(120,10)
+$SubscriptionSectionLabel.size = new-object System.Drawing.Size(160,20)
+$SubscriptionSectionLabel.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold)
+$SubscriptionSectionLabel.BorderStyle = 0
+$SubscriptionSectionLabel.Text = "Select Subscription"
+$Form.Controls.Add($SubscriptionSectionLabel)
 
-#$DropDownSubscription = new-object System.Windows.Forms.ComboBox
-#$DropDownSubscription.Location = new-object System.Drawing.Size(30,30)
-#$DropDownSubscription.Size = new-object System.Drawing.Size(300,20)
-#$DropDownSubscription.add_SelectedValueChanged({get-ResourceGroups})
-#$Form.Controls.Add($DropDownSubscription)
+$DropDownSubscription = new-object System.Windows.Forms.ComboBox
+$DropDownSubscription.Location = new-object System.Drawing.Size(30,30)
+$DropDownSubscription.Size = new-object System.Drawing.Size(300,20)
+$DropDownSubscription.add_SelectedValueChanged({get-ResourceGroups})
+$Form.Controls.Add($DropDownSubscription)
 
-#$RGSectionLabel = new-object System.Windows.Forms.Label
-#$RGSectionLabel.Location = new-object System.Drawing.Size(110,60)
-#$RGSectionLabel.size = new-object System.Drawing.Size(160,20)
-#$RGSectionLabel.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold)
-#$RGSectionLabel.BorderStyle = 0
-#$RGSectionLabel.Text = "Select Resource Group"
-#$RGSectionLabel.Visible = $false
-#$Form.Controls.Add($RGSectionLabel)
+$RGSectionLabel = new-object System.Windows.Forms.Label
+$RGSectionLabel.Location = new-object System.Drawing.Size(110,60)
+$RGSectionLabel.size = new-object System.Drawing.Size(160,20)
+$RGSectionLabel.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold)
+$RGSectionLabel.BorderStyle = 0
+$RGSectionLabel.Text = "Select Resource Group"
+$RGSectionLabel.Visible = $false
+$Form.Controls.Add($RGSectionLabel)
 
-#$DropDownRG = new-object System.Windows.Forms.ComboBox
-#$DropDownRG.Location = new-object System.Drawing.Size(30,80)
-#$DropDownRG.Size = new-object System.Drawing.Size(300,20)
-#$DropDownRG.add_SelectedValueChanged({get-storage})
-#$DropDownRG.Visible = $false
-#$Form.Controls.Add($DropDownRG)
+$DropDownRG = new-object System.Windows.Forms.ComboBox
+$DropDownRG.Location = new-object System.Drawing.Size(30,80)
+$DropDownRG.Size = new-object System.Drawing.Size(300,20)
+$DropDownRG.add_SelectedValueChanged({get-storage})
+$DropDownRG.Visible = $false
+$Form.Controls.Add($DropDownRG)
 
-#$StorageSectionLabel = new-object System.Windows.Forms.Label
-#$StorageSectionLabel.Location = new-object System.Drawing.Size(110,100)
-#$StorageSectionLabel.size = new-object System.Drawing.Size(160,20)
-#$StorageSectionLabel.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold)
-#$StorageSectionLabel.BorderStyle = 0
-#$StorageSectionLabel.Text = "Select Storage"
-#$StorageSectionLabel.Visible = $false
-#$Form.Controls.Add($StorageSectionLabel)
+$StorageSectionLabel = new-object System.Windows.Forms.Label
+$StorageSectionLabel.Location = new-object System.Drawing.Size(110,100)
+$StorageSectionLabel.size = new-object System.Drawing.Size(160,20)
+$StorageSectionLabel.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold)
+$StorageSectionLabel.BorderStyle = 0
+$StorageSectionLabel.Text = "Select Storage"
+$StorageSectionLabel.Visible = $false
+$Form.Controls.Add($StorageSectionLabel)
 
-#$DropDownStorage = new-object System.Windows.Forms.ComboBox
-#$DropDownStorage.Location = new-object System.Drawing.Size(30,120)
-#$DropDownStorage.Size = new-object System.Drawing.Size(300,20)
-#$DropDownStorage.add_SelectedValueChanged({get-vnet})
-#$DropDownStorage.Visible = $false
-#$Form.Controls.Add($DropDownStorage)
+$DropDownStorage = new-object System.Windows.Forms.ComboBox
+$DropDownStorage.Location = new-object System.Drawing.Size(30,120)
+$DropDownStorage.Size = new-object System.Drawing.Size(300,20)
+$DropDownStorage.add_SelectedValueChanged({get-vnet})
+$DropDownStorage.Visible = $false
+$Form.Controls.Add($DropDownStorage)
 
-#$vNetSectionLabel = new-object System.Windows.Forms.Label
-#$vNetSectionLabel.Location = new-object System.Drawing.Size(110,140)
-#$vNetSectionLabel.size = new-object System.Drawing.Size(160,20)
-#$vNetSectionLabel.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold)
-#$vNetSectionLabel.BorderStyle = 0
-#$vNetSectionLabel.Text = "Select VNET"
-#$vNetSectionLabel.Visible = $false
-#$Form.Controls.Add($vNetSectionLabel)
+$vNetSectionLabel = new-object System.Windows.Forms.Label
+$vNetSectionLabel.Location = new-object System.Drawing.Size(110,140)
+$vNetSectionLabel.size = new-object System.Drawing.Size(160,20)
+$vNetSectionLabel.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold)
+$vNetSectionLabel.BorderStyle = 0
+$vNetSectionLabel.Text = "Select VNET"
+$vNetSectionLabel.Visible = $false
+$Form.Controls.Add($vNetSectionLabel)
 
-#$DropDownVNET = new-object System.Windows.Forms.ComboBox
-#$DropDownVNET.Location = new-object System.Drawing.Size(30,160)
-#$DropDownVNET.Size = new-object System.Drawing.Size(300,20)
-#$DropDownVNET.add_SelectedValueChanged({get-subnets})
-#$DropDownVNET.Visible = $false
-#$Form.Controls.Add($DropDownVNET)
+$DropDownVNET = new-object System.Windows.Forms.ComboBox
+$DropDownVNET.Location = new-object System.Drawing.Size(30,160)
+$DropDownVNET.Size = new-object System.Drawing.Size(300,20)
+$DropDownVNET.add_SelectedValueChanged({get-subnets})
+$DropDownVNET.Visible = $false
+$Form.Controls.Add($DropDownVNET)
 
-#$SubnetSectionLabel = new-object System.Windows.Forms.Label
-#$SubnetSectionLabel.Location = new-object System.Drawing.Size(110,180)
-#$SubnetSectionLabel.size = new-object System.Drawing.Size(160,20)
-#$SubnetSectionLabel.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold)
-#$SubnetSectionLabel.BorderStyle = 0
-#$SubnetSectionLabel.Text = "Select Subnet"
-#$SubnetSectionLabel.Visible = $false
-#$Form.Controls.Add($SubnetSectionLabel)
+$SubnetSectionLabel = new-object System.Windows.Forms.Label
+$SubnetSectionLabel.Location = new-object System.Drawing.Size(110,180)
+$SubnetSectionLabel.size = new-object System.Drawing.Size(160,20)
+$SubnetSectionLabel.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold)
+$SubnetSectionLabel.BorderStyle = 0
+$SubnetSectionLabel.Text = "Select Subnet"
+$SubnetSectionLabel.Visible = $false
+$Form.Controls.Add($SubnetSectionLabel)
 
-#$DropDownSubnet = new-object System.Windows.Forms.ComboBox
-#$DropDownSubnet.Location = new-object System.Drawing.Size(30,200)
-#$DropDownSubnet.Size = new-object System.Drawing.Size(300,20)
-#$DropDownSubnet.add_SelectedValueChanged({enable-VMproperties})
-#$DropDownSubnet.Visible = $false
-#$Form.Controls.Add($DropDownSubnet)
+$DropDownSubnet = new-object System.Windows.Forms.ComboBox
+$DropDownSubnet.Location = new-object System.Drawing.Size(30,200)
+$DropDownSubnet.Size = new-object System.Drawing.Size(300,20)
+$DropDownSubnet.add_SelectedValueChanged({enable-VMproperties})
+$DropDownSubnet.Visible = $false
+$Form.Controls.Add($DropDownSubnet)
 
-#$SizeSectionLabel = new-object System.Windows.Forms.Label
-#$SizeSectionLabel.Location = new-object System.Drawing.Size(110,220)
-#$SizeSectionLabel.size = new-object System.Drawing.Size(160,20)
-#$SizeSectionLabel.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold)
-#$SizeSectionLabel.BorderStyle = 0
-#$SizeSectionLabel.Text = "Select VM Size"
-#$SizeSectionLabel.Visible = $false
-#$Form.Controls.Add($SizeSectionLabel)
+$SizeSectionLabel = new-object System.Windows.Forms.Label
+$SizeSectionLabel.Location = new-object System.Drawing.Size(110,220)
+$SizeSectionLabel.size = new-object System.Drawing.Size(160,20)
+$SizeSectionLabel.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold)
+$SizeSectionLabel.BorderStyle = 0
+$SizeSectionLabel.Text = "Select VM Size"
+$SizeSectionLabel.Visible = $false
+$Form.Controls.Add($SizeSectionLabel)
 
-#$DropDownSize = new-object System.Windows.Forms.ComboBox
-#$DropDownSize.Location = new-object System.Drawing.Size(30,240)
-#$DropDownSize.Size = new-object System.Drawing.Size(300,20)
-#$DropDownSize.Visible = $false
-#$Form.Controls.Add($DropDownSize)
+$DropDownSize = new-object System.Windows.Forms.ComboBox
+$DropDownSize.Location = new-object System.Drawing.Size(30,240)
+$DropDownSize.Size = new-object System.Drawing.Size(300,20)
+$DropDownSize.Visible = $false
+$Form.Controls.Add($DropDownSize)
 
-#$EnvSectionLabel = new-object System.Windows.Forms.Label
-#$EnvSectionLabel.Location = new-object System.Drawing.Size(110,260)
-#$EnvSectionLabel.size = new-object System.Drawing.Size(160,20)
-#$EnvSectionLabel.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold)
-#$EnvSectionLabel.BorderStyle = 0
-#$EnvSectionLabel.Text = "Select Envinroment"
-#$EnvSectionLabel.Visible = $false
-#$Form.Controls.Add($EnvSectionLabel)
+$EnvSectionLabel = new-object System.Windows.Forms.Label
+$EnvSectionLabel.Location = new-object System.Drawing.Size(110,260)
+$EnvSectionLabel.size = new-object System.Drawing.Size(160,20)
+$EnvSectionLabel.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold)
+$EnvSectionLabel.BorderStyle = 0
+$EnvSectionLabel.Text = "Select Envinroment"
+$EnvSectionLabel.Visible = $false
+$Form.Controls.Add($EnvSectionLabel)
 
-#$DropDownEnv = new-object System.Windows.Forms.ComboBox
-#$DropDownEnv.Location = new-object System.Drawing.Size(30,280)
-#$DropDownEnv.Size = new-object System.Drawing.Size(300,20)
-#$DropDownEnv.Visible = $false
-#$Form.Controls.Add($DropDownEnv)
+$DropDownEnv = new-object System.Windows.Forms.ComboBox
+$DropDownEnv.Location = new-object System.Drawing.Size(30,280)
+$DropDownEnv.Size = new-object System.Drawing.Size(300,20)
+$DropDownEnv.Visible = $false
+$Form.Controls.Add($DropDownEnv)
 
-#$ImageSectionLabel = new-object System.Windows.Forms.Label
-#$ImageSectionLabel.Location = new-object System.Drawing.Size(110,300)
-#$ImageSectionLabel.size = new-object System.Drawing.Size(160,20)
-#$ImageSectionLabel.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold)
-#$ImageSectionLabel.BorderStyle = 0
-#$ImageSectionLabel.Text = "Select Image"
-#$ImageSectionLabel.Visible = $false
-#$Form.Controls.Add($ImageSectionLabel)
+$ImageSectionLabel = new-object System.Windows.Forms.Label
+$ImageSectionLabel.Location = new-object System.Drawing.Size(110,300)
+$ImageSectionLabel.size = new-object System.Drawing.Size(160,20)
+$ImageSectionLabel.Font = New-Object System.Drawing.Font("Arial",10,[System.Drawing.FontStyle]::Bold)
+$ImageSectionLabel.BorderStyle = 0
+$ImageSectionLabel.Text = "Select Image"
+$ImageSectionLabel.Visible = $false
+$Form.Controls.Add($ImageSectionLabel)
 
-#$DropDownImage = new-object System.Windows.Forms.ComboBox
-#$DropDownImage.Location = new-object System.Drawing.Size(30,320)
-#$DropDownImage.Size = new-object System.Drawing.Size(300,20)
-#$DropDownImage.Visible = $false
-#$Form.Controls.Add($DropDownImage)
+$DropDownImage = new-object System.Windows.Forms.ComboBox
+$DropDownImage.Location = new-object System.Drawing.Size(30,320)
+$DropDownImage.Size = new-object System.Drawing.Size(300,20)
+$DropDownImage.Visible = $false
+$Form.Controls.Add($DropDownImage)
 
 $CurrentTemplateLabel = new-object System.Windows.Forms.Label
 $CurrentTemplateLabel.Location = new-object System.Drawing.Size(30,340)
