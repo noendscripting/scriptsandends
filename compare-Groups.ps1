@@ -147,14 +147,23 @@ if ($compare)
 
    
   }
-  $compareReport | Format-Table GroupName,UserId,SID,PresentIN,MissingIN
 
-  $outputCSV = Read-Host "Type path to the output csv file if you want to save results. Otherwise hit enter to exit script"
-  if ($outputCSV.Length -ne 0)
+  if ($compareReport -ne $null)
+  {
+    $compareReport | Format-Table GroupName,UserId,SID,PresentIN,MissingIN
+
+    $outputCSV = Read-Host "Type path to the output csv file if you want to save results. Otherwise hit enter to exit script"
+    if ($outputCSV.Length -ne 0)
+    {
+
+    $compareReport | select GroupName,UserId,SID,PresentIN,MissingIN | Export-Csv $outputCSV -NoTypeInformation
+
+    }
+  }
+  Else
   {
 
-  $compareReport | select GroupName,UserId,SID,PresentIN,MissingIN | Export-Csv $outputCSV -NoTypeInformation
-
+    Write-Host "No group membership discrepancies found"
   }
 
    break
