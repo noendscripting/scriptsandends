@@ -1,6 +1,7 @@
 ﻿<#
 .SYNOPSIS  
  The srcipt collects group membership and compares it to previusly generated export.
+
 .DESCRIPTION
   Script collect group membership and then either exports it to csv file or compares it with previously generated export file.
   Script outputs mismatches on screen  if any and gives option to save output to a csv file
