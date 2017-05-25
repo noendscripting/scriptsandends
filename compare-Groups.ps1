@@ -45,32 +45,35 @@ param(
 Function Get-Members
 {
     $report = @()
+    write-host "Generating Group List" -ForegroundColor Green
     $groups = (Get-ADGroup -Filter *)
+    $groupTotal = $groups.Count
+    $groupCount = 0
+    Write-Host "Found $($groupTotal) groups in the domain" -ForegroundColor Green
 
-forEach ($group in $groups)
-
-{   
-    $members = $null
-    $members = (Get-ADGroup $group.name -properties members).members | Get-ADObject -Properties objectSid,sAMAccountName  | Select-Object distinguishedName,objectSid,SamAccountName
-    if ($members -ne $null)
-    {
-        
-        
-        Foreach ( $member in $members)
-        {
-            $item = New-Object psobject -Property @{
-            "Group" = $group.distinguishedName
-            "DN" = $member.distinguishedName
-            "SID" = $member.objectSid
-            "DC" = $env:COMPUTERNAME
-            "ID" = $member.SamAccountName
+    forEach ($group in $groups)
+    {   
+        #Start-Sleep -Seconds 5  #use for debuging puposes only
+        $groupCount += 1
+        Write-Progress -Activity "Gathering group memebership data" -PercentComplete (($groupCount/$groupTotal)*100) -Id 1 -CurrentOperation "members in group $($group.name)"
+        $members = $null
+        $members = (Get-ADGroup $group.name -properties members).members | Get-ADObject -Properties objectSid,sAMAccountName  | Select-Object distinguishedName,objectSid,SamAccountName
+        if ($members -ne $null)
+        {      
+            Foreach ( $member in $members)
+            {
+                $item = New-Object psobject -Property @{
+                "Group" = $group.distinguishedName
+                "DN" = $member.distinguishedName
+                "SID" = $member.objectSid
+                "DC" = $env:COMPUTERNAME
+                "ID" = $member.SamAccountName }
+                $report += $item
             }
-           $report += $item
-        }
      
         
-    }
-
+        }
+    
     }
 
     return $report
