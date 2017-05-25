@@ -46,7 +46,7 @@ Function Get-Members
 {
     $report = @()
     write-host "Generating Group List" -ForegroundColor Green
-    $groups = (Get-ADGroup -Filter *)
+    $groups = (Get-ADGroup -LDAPFilter "(&(!(groupType:1.2.840.113556.1.4.803:=1))(!(cn=Domain*Users)(!(cn=Domain*Computers))))")
     $groupTotal = $groups.Count
     $groupCount = 0
     Write-Host "Found $($groupTotal) groups in the domain" -ForegroundColor Green
