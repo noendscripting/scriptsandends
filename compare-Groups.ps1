@@ -45,13 +45,13 @@ param(
 Function Get-Members
 {
     $report = @()
-$groups = (Get-ADGroup -Filter *).distinguishedName
+    $groups = (Get-ADGroup -Filter *)
 
 forEach ($group in $groups)
 
 {   
     $members = $null
-    $members = Get-ADGroupMember $group
+    $members = (Get-ADGroup $group.name -properties members).members | Get-ADObject -Properties objectSid,sAMAccountName  | Select-Object distinguishedName,objectSid,SamAccountName
     if ($members -ne $null)
     {
         
@@ -59,9 +59,9 @@ forEach ($group in $groups)
         Foreach ( $member in $members)
         {
             $item = New-Object psobject -Property @{
-            "Group" = $group
+            "Group" = $group.distinguishedName
             "DN" = $member.distinguishedName
-            "SID" = $member.SID
+            "SID" = $member.objectSid
             "DC" = $env:COMPUTERNAME
             "ID" = $member.SamAccountName
             }
