@@ -46,7 +46,7 @@ ForEach($dc in $dcList)
     Write-Progress -Activity "Processing DC data" -PercentComplete (($dccount/$dcList.Count)*100) -Id 1 -CurrentOperation "users in DC $($dc.Split(".")[0])"
     $user = $null
     $userCount = 0
-    $currentDC = Get-ADDomainController -Identity $dc
+    $currentDC = Get-ADDomainController -Identity $dc -Server $pdce
      
     [datetime]$whenChanged  = '2017-05-25'
 
