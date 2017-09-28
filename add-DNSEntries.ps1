@@ -40,7 +40,7 @@ param(
 $records = Import-Csv -Path $csvFile
 
 
-$CurrentDNSconfig = Get-WMIObject -ComputerName $DNSserver  -Namespace 'root\MicrosoftDNS' -Class MicrosoftDNS_ResourceRecord |? {$_.ContainerName -eq $dnsZone}
+$CurrentDNSconfig = Get-WMIObject -ComputerName $DNSserver  -Namespace 'root\MicrosoftDNS' -Class MicrosoftDNS_ResourceRecord |Where-Object {$_.ContainerName -eq $dnsZone}
 if($CurrentDNSconfig -eq $null)
 {
 
@@ -58,8 +58,8 @@ ForEach ($srcRec in $Records) {
             
     $class         = $srcRec.class          # A, CNAME, PTR, etc.            
     $ownerName     = $srcRec.OwnerName        # Name column in DNS GUI, FQDN            
-    $containerName = $srcRec.ContainerName    # Zone FQDN            
-    $domainName    = $srcRec.DomainName       # Zone FQDN            
+    #$containerName = $srcRec.ContainerName    # Zone FQDN            
+    #$domainName    = $srcRec.DomainName       # Zone FQDN            
     $ttl           = $srcRec.TTL              # TTL            
     $recordClass   = $srcRec.RecordClass      # Usually 1 (IN)            
     $recordData    = $srcRec.RecordData       # Data column in DNS GUI, value            
