@@ -24,19 +24,26 @@ DISCLAIMER
                 
                 Write-Verbose -Message 'Removing the Azure VM...'
 				$null = $vm | Remove-AzureRmVM -Force
-				Write-Verbose -Message 'Removing the Azure network interface...'
-				foreach($nicUri in $vm.NetworkInterfaceIDs)
+				Write-Verbose -Message "Removing the Azure network interface..."
+				foreach($vmNiCId in $vm.NetworkProfile.NetworkInterfaces.Id)
 				{
-					$nic = Get-AzureRmNetworkInterface -ResourceGroupName $vm.ResourceGroupName -Name $nicUri.Split('/')[-1]
-					Remove-AzureRmNetworkInterface -Name $nic.Name -ResourceGroupName $vm.ResourceGroupName -Force
-					foreach($ipConfig in $nic.IpConfigurations)
-					{
-						if($ipConfig.PublicIpAddress -ne $null)
-					        {
-							Write-Verbose -Message 'Removing the Public IP Address...'
-							Remove-AzureRmPublicIpAddress -ResourceGroupName $vm.ResourceGroupName -Name $ipConfig.PublicIpAddress.Id.Split('/')[-1] -Force
-				             	} 
-				 	}
+				   $netWorkidArray = $vmNiCId.Split("/")
+				   Write-Verbose "Proccessing NIC $($netWorkidArray[$netWorkidArray.Count-1])"
+				   $vmNic = Get-AzureRmNetworkInterface -Name $netWorkidArray[$netWorkidArray.Count-1] -ResourceGroupName $ResourceGroupName
+				   Write-Verbose "Deleting NIC $netWorkidArray[$netWorkidArray.Count-1] "
+				   Remove-AzureRmNetworkInterface -Name $netWorkidArray[$netWorkidArray.Count-1] -ResourceGroupName $ResourceGroupName -Force
+					
+						forEach ($PublicAddressId in $vmNic.IpConfigurations.PublicIPAddress.Id)
+						{
+							$configUratioinArray =  $PublicAddressId.Split("/")
+							Write-Verbose "Deleting Public Ip Addres $($configUratioinArray[$configUratioinArray.Count-1])"
+							Remove-AzureRmPublicIpAddress -Name $configUratioinArray[$configUratioinArray.Count-1] -ResourceGroupName $ResourceGroupName          
+							Clear-Variable configUratioinArray
+							Clear-Variable PublicAddressId
+						}
+					
+					clear-variable netWorkidArray
+					Clear-Variable vmNiC
 				} 
 
 				## Remove Disks
@@ -50,7 +57,7 @@ DISCLAIMER
 				    $osDiskContainerName = $osDiskUri.Split('/')[-2]
 				
 				    ## TODO: Does not account for resouce group 
-				    $osDiskStorageAcct = Get-AzureRmStorageAccount | where { $_.StorageAccountName -eq $osDiskUri.Split('/')[2].Split('.')[0] }
+				    $osDiskStorageAcct = Get-AzureRmStorageAccount | Where-Object { $_.StorageAccountName -eq $osDiskUri.Split('/')[2].Split('.')[0] }
 				    $osDiskStorageAcct | Remove-AzureStorageBlob -Container $osDiskContainerName -Blob $osDiskUri.Split('/')[-1] -ea Ignore
 				
 				    #region Remove the status blob
