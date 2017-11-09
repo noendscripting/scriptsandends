@@ -37,7 +37,7 @@ DISCLAIMER
 						{
 							$configUratioinArray =  $PublicAddressId.Split("/")
 							Write-Verbose "Deleting Public Ip Addres $($configUratioinArray[$configUratioinArray.Count-1])"
-							Remove-AzureRmPublicIpAddress -Name $configUratioinArray[$configUratioinArray.Count-1] -ResourceGroupName $ResourceGroupName          
+							Remove-AzureRmPublicIpAddress -Name $configUratioinArray[$configUratioinArray.Count-1] -ResourceGroupName $ResourceGroupName  -Force        
 							Clear-Variable configUratioinArray
 							Clear-Variable PublicAddressId
 						}
