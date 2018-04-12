@@ -28,6 +28,14 @@
 
 
 #>
+param(
+
+[Parameter(Mandatory=$true)]
+[string]$outputCsv,
+[Parameter(Mandatory=$true)]
+[string]$DomainFQDN
+
+)
 
 Function get-GroupNameFromSID
 {
@@ -38,14 +46,7 @@ Function get-GroupNameFromSID
 
 
 }
-param(
 
-[Parameter(Mandatory=$true)]
-[string]$outputCsv,
-[Parameter(Mandatory=$true)]
-[string]$DomainFQDN
-
-)
 
 
 #Creating array to store collected data
